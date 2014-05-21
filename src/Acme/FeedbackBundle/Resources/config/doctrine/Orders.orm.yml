@@ -1,0 +1,41 @@
+Acme\FeedbackBundle\Entity\Orders:
+    type: entity
+    table: orders
+    indexes:
+        deleted:
+            columns:
+                - deleted
+    id:
+        idOrder:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            column: id_order
+            generator:
+                strategy: IDENTITY
+    fields:
+        orderName:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            column: order_name
+        createdAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: updated_at
+        deleted:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+    lifecycleCallbacks: {  }

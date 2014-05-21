@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Restocheck Demo</title>
+        {% block javascripts %}
+            {% javascripts '@AcmeFeedbackBundle/Resources/public/js/*' %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}    
+        {% block stylesheets %}    
+            {% stylesheets '@AcmeFeedbackBundle/Resources/public/css/*' filter='cssrewrite' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}    
+
+    </head>
+    <body>
+        <form action="/feedback/" name="frmQuestion" method="POST" >
+        <ul>
+                {% for aQuestionList in aQuestions %}
+                <li>{{ aQuestionList.questionName }}</li>                
+                    {% if aQuestionList.questionType == 'slider' %}                    
+                    <script>
+                        $(function() {
+                                $( "#slider-range-min"+{{loop.index}} ).slider({
+                                range: "min",
+                                value: 5,
+                                min: 1,
+                                max: 10,
+                                slide: function( event, ui ) {                            
+                                $( "#amount"+{{loop.index}} ).val( ui.value );
+                                }
+                                });
+                                $( "#amount"+{{loop.index}} ).val( $( "#slider-range-min"+{{loop.index}} ).slider( "value" ) );
+                            });
+                    </script>
+                    <input type="text" name="amount{{ loop.index }}" id="amount{{ loop.index }}" style="border:0; color:#f6931f; font-weight:bold;">
+                    <div id="slider-range-min{{ loop.index }}"></div>
+                    {% endif %}
+                    {% if aQuestionList.questionType == 'textarea' %}                    
+                        <textarea name="question{{loop.index}}" id="question{{loop.index}}" rows="4" cols="50"></textarea>
+                    {% endif %}
+                    {% if aQuestionList.questionType == 'text' %}                    
+                        <input type="text" name="question{{loop.index}}" id="question{{loop.index}}" value=""/>
+                    {% endif %}                        
+                    {% if aQuestionList.questionType == 'checkbox' %}                    
+                        <input type="checkbox" id="check_box{{loop.index}}" name="check_box{{loop.index}}" value="">
+                    {% endif %}    
+                {% else %}
+                    <li>No users found</li>
+                {% endfor %}
+        </ul>
+            <!-- <a href="/feedback?idPage=2" > Next </a>  -->
+            <input type="submit" value="Save" />
+        </form>
+    </body>
+</html>

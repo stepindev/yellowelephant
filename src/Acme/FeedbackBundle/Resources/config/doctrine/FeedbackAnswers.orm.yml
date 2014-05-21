@@ -1,0 +1,57 @@
+Acme\FeedbackBundle\Entity\FeedbackAnswers:
+    type: entity
+    table: feedback_answers
+    indexes:
+        id_order:
+            columns:
+                - id_order
+                - id_question
+                - deleted
+        created_at:
+            columns:
+                - created_at
+    id:
+        idFeedbackAnswer:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            column: id_feedback_answer
+            generator:
+                strategy: IDENTITY
+    fields:
+        idOrder:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: id_order
+        idQuestion:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            column: id_question
+        answer:
+            type: text
+            nullable: false
+            length: null
+            fixed: false
+            comment: ''
+        createdAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: updated_at
+        deleted:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+    lifecycleCallbacks: {  }
