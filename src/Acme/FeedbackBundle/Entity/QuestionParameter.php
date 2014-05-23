@@ -1,7 +1,9 @@
 <?php
 
 namespace Acme\FeedbackBundle\Entity;
-
+/**
+ * Jaimin: extra after slider works its removed 
+ */
 class QuestionParameter 
 {
 
@@ -14,12 +16,13 @@ class QuestionParameter
         //echo $value->getQuestionType();
         if($aParameters)
         { 
-            //if(array_key_exists('order_name',$aParameters)) $this->orderId = ;
-            foreach ($aParameters as $oQuestionValue) 
+            //if(array_key_exists('order_name',$aParameters)) $this->ordgetQuestionNameerId = ;            
+            foreach ($aParameters as $sKeyQuestion => $oQuestionValue) 
             {
-                $nQuestionId = $oQuestionValue->getIdQuestion();
-                $this->data[$nQuestionId] = array('id_queston'=>$nQuestionId,"label" => $oQuestionValue->getQuestionName(), "value" => "",'type'=>$oQuestionValue->getQuestionType());
-                $this->{$nQuestionId} = "";
+               // $nQuestionId = $oQuestionValue->getIdQuestion();
+                $sQuestionName = $oQuestionValue->getDisplayText();
+                $this->data[$sQuestionName] = array('id_queston'=>$oQuestionValue->getIdQuestion(),"label" => $oQuestionValue->getQuestionName(), "value" => "",'type'=>$oQuestionValue->getQuestionType());
+                $this->{$sQuestionName} = "";
             }
         }
     }

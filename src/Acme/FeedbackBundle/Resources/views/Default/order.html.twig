@@ -13,10 +13,9 @@
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}    
-
     </head>
     <body>
-
+            
         {{ form_start(form) }}
         {% for key, value in form %}
             {% set key = value %}

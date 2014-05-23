@@ -5,6 +5,9 @@ Acme\FeedbackBundle\Entity\Questions:
         page:
             columns:
                 - page
+        display_text:
+            columns:
+                - display_text
     id:
         idQuestion:
             type: integer
@@ -16,6 +19,13 @@ Acme\FeedbackBundle\Entity\Questions:
             generator:
                 strategy: IDENTITY
     fields:
+        displayText:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            column: display_text
         questionName:
             type: string
             nullable: false

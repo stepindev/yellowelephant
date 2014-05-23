@@ -4,33 +4,51 @@ namespace Acme\FeedbackBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-//use Genemu\Bundle\FormBundle\Form\JQuery\Type\SliderType;
-// use Genemu\Bundle\FormBundle\Form\JQuery\Type;
 
 class QuestionParameterType extends AbstractType
 {   
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /*public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $aQuestionData = $options["data"]->get();
+        $aQuestionData = $options["data"]->get();        
+        
         foreach ($aQuestionData as $sKeyQuestionData => $aValueQuestionData) 
-        {               
+        {   
             switch($aValueQuestionData['type'])
             {
-                case 'slider':                                                            
-                    $builder->add($sKeyQuestionData,'text',array("label"=>$aValueQuestionData["label"],'attr' => array('class' => 'slider')));
+                case 'slider':
+                    $aValueQuestionData['type'] = 'genemu_jqueryslider';
                 break;    
-                default:
-                    $builder->add($sKeyQuestionData,$aValueQuestionData['type'],array("label"=>$aValueQuestionData["label"]));
-                break;    
+            
             }            
-                        
+            
+            $builder->add($sKeyQuestionData,$aValueQuestionData['type'],array("label"=>$aValueQuestionData["label"]));            
         }
         $builder->add('save', 'submit');
+    }*/
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        foreach ($options['data'] as $question) 
+        {
+            // Current form field attributes
+            $sFieldName = $question->getDisplayText();
+            $sQuestionName = $question->getQuestionName();
+            $sQuestionType = $question->getQuestionType();            
+            switch($sQuestionType)
+            {
+                case 'slider':
+                    $sQuestionType = 'genemu_jqueryslider';
+                break;    
+            
+            }
+            // build the form fields
+            $builder->add($sFieldName, $sQuestionType, array("label"=>$sQuestionName));
+        }
+        $builder->add('save', 'submit');
+        
     }
-
     public function getName()
     {
-        return 'questions';   
+        return 'feedbackquestions';   
     }
 
     

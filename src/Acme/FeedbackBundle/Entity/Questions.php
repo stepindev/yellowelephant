@@ -220,4 +220,32 @@ class Questions
     {
         return $this->deleted;
     }
+    /**
+     * @var string
+     */
+    private $displayText;
+
+
+    /**
+     * Set displayText
+     *
+     * @param string $displayText
+     * @return Questions
+     */
+    public function setDisplayText($displayText)
+    {
+        $this->displayText = $displayText;
+
+        return $this;
+    }
+
+    /**
+     * Get displayText
+     *
+     * @return string 
+     */
+    public function getDisplayText()
+    {
+        return $this->displayText;
+    }
 }

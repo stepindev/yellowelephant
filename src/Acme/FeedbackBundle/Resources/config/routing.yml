@@ -2,12 +2,18 @@ acme_default:
     pattern:  /
     defaults: { _controller: AcmeFeedbackBundle:Default:order}
 
+#acme_feedback_homepage:
+#    pattern:  /feedback/{page}
+#    defaults: { _controller: AcmeFeedbackBundle:Default:index, page: 1 }
+#    requirements:
+#        page:  \d+
+
 acme_feedback_homepage:
     pattern:  /feedback/{page}
-    defaults: { _controller: AcmeFeedbackBundle:Default:index, page: 1 }
+    defaults: { _controller: AcmeFeedbackBundle:Default:indextest, page: 1 }
     requirements:
         page:  \d+
-        
+
 acme_target_route:
     pattern:  /order/
     defaults: { _controller: AcmeFeedbackBundle:Default:order}

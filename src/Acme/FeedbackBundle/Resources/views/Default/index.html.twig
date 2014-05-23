@@ -13,14 +13,34 @@
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}    
+      {% for aQuestionList in aQuestions %}          
+        {% if aQuestionList.questionType == 'slider' %}
+            {% block genemu_jqueryslider_javascript %}
+                {% spaceless %}
+                    <script type="text/javascript">
+                        jQuery(document).ready(function($) {
+                            var $field = $('#{{sFormName}}_{{ aQuestionList.displayText }}');
+                            var $configs = $.extend({{ configs|json_encode|raw }}, {
+                                value: {{ value ? value : 0 }},
+                                slide: function(event, ui) {
+                                    $field.val(ui.value);
+                                }
+                            });
 
+                            $('#{{sFormName}}_{{ aQuestionList.displayText }}_slider').slider($configs);
+                        });
+                    </script>
+                {% endspaceless %}
+            {% endblock genemu_jqueryslider_javascript %}
+        {% endif %}
+      {% endfor %}
     </head>
     <body>
 
         {{ form_start(form) }}
+        
         {% for key, value in form %}
             {% set key = value %}
-            
         {% endfor %}
         {{ form_end(form) }}
     </body>    
