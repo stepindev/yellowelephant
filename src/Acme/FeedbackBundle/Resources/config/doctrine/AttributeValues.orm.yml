@@ -1,0 +1,51 @@
+Acme\FeedbackBundle\Entity\AttributeValues:
+    type: entity
+    table: attribute_values
+    indexes:
+        id_question:
+            columns:
+                - id_question
+    id:
+        idAttributeValue:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            column: id_attribute_value
+            generator:
+                strategy: IDENTITY
+    fields:
+        attributeValue:
+            type: string
+            nullable: false
+            length: 255
+            fixed: false
+            comment: ''
+            column: attribute_value
+        createdAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: created_at
+        updatedAt:
+            type: datetime
+            nullable: false
+            comment: ''
+            column: updated_at
+        deleted:
+            type: boolean
+            nullable: false
+            comment: ''
+            default: '0'
+    manyToOne:
+        idQuestion:
+            targetEntity: Questions
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_question:
+                    referencedColumnName: id_question
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

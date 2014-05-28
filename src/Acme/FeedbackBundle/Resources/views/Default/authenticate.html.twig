@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Restocheck Demo</title>
+    </head>
+    <body>
+        {{ form_start(form) }}
+        {% for key, value in form %}
+            {% set key = value %}
+        {% endfor %}
+        {{ form_end(form) }}
+    </body>    
+</html>

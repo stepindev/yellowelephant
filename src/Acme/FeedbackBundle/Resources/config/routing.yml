@@ -1,8 +1,8 @@
-acme_default:
-    pattern:  /
-    defaults: { _controller: AcmeFeedbackBundle:Default:order}
-
-acme_feedback_homepage:
+acme_authenticate:
+    pattern:  /authenticate/
+    defaults: { _controller: AcmeFeedbackBundle:Default:authenticate}
+    
+acme_feedback:
     pattern:  /feedback/{page}
     defaults: { _controller: AcmeFeedbackBundle:Default:index, page: 1 }
     requirements:

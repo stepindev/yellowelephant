@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -32,8 +32,8 @@ twig:
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
-    use_controller: false
-    bundles:        [ AcmeFeedbackBundle ]        
+    use_controller: false    
+    bundles:        [ AcmeFeedbackBundle ]    
     #AcmeFeedbackBundle
     #java: /usr/bin/java
     filters:
@@ -67,7 +67,7 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
-    spool:     { type: memory } 
+    spool:     { type: memory }
     
 genemu_form:
     tinymce: ~

@@ -4,52 +4,55 @@ namespace Acme\FeedbackBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
 class QuestionParameterType extends AbstractType
 {   
-    /*public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $aQuestionData = $options["data"]->get();        
-        
-        foreach ($aQuestionData as $sKeyQuestionData => $aValueQuestionData) 
-        {   
-            switch($aValueQuestionData['type'])
-            {
-                case 'slider':
-                    $aValueQuestionData['type'] = 'genemu_jqueryslider';
-                break;    
-            
-            }            
-            
-            $builder->add($sKeyQuestionData,$aValueQuestionData['type'],array("label"=>$aValueQuestionData["label"]));            
-        }
-        $builder->add('save', 'submit');
-    }*/
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        foreach ($options['data'] as $question) 
+    {       
+        $fieldOptions = array();
+        foreach ($options['data'] as $aQuestion) 
         {
+            $oValidation =  json_decode($aQuestion['validations']);
+            if(isset($oValidation->is_required))
+            {    
+                $fieldOptions = array('constraints' => new NotBlank());
+            }
+            else if(isset($oValidation->email))
+            {
+                $email = new Email();
+                $email->message = 'Invalid email address';
+                $fieldOptions = array('constraints' => $email);
+            }    
             // Current form field attributes
-            $sFieldName = $question->getDisplayText();
-            $sQuestionName = $question->getQuestionName();
-            $sQuestionType = $question->getQuestionType();            
+            $sFieldName = $aQuestion['display_text'];
+            $sQuestionName = $aQuestion['question_name'];
+            $sQuestionType = $aQuestion['question_type']; 
+            
+            /*
+             * Quey change then use questin object
+                $sFieldName = $oQuestion->getDisplayText();
+                $sQuestionName = $oQuestion->getQuestionName();
+                $sQuestionType = $oQuestion->getQuestionType();            
+             */
             switch($sQuestionType)
             {
                 case 'slider':
                     $sQuestionType = 'genemu_jqueryslider';
                 break;    
-            
+                case 'choice':                    
+                    //value and display text same use for array_combine
+                    $fieldOptions['choices'] = array_combine(explode(",",$aQuestion['attribute_value']), explode(",",$oQuestion['attribute_value']) );
+                break;    
             }
+            $fieldOptions = array("label"=>$sQuestionName)+$fieldOptions;
             // build the form fields
-            $builder->add($sFieldName, $sQuestionType, array("label"=>$sQuestionName));
+            $builder->add($sFieldName, $sQuestionType, $fieldOptions);
         }
         $builder->add('save', 'submit');
-        
     }
     public function getName()
     {
         return 'feedbackquestions';   
     }
-
-    
 }

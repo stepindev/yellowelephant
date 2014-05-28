@@ -2,14 +2,15 @@ Acme\FeedbackBundle\Entity\FeedbackAnswers:
     type: entity
     table: feedback_answers
     indexes:
-        id_order:
-            columns:
-                - id_order
-                - id_question
-                - deleted
         created_at:
             columns:
                 - created_at
+        id_order:
+            columns:
+                - id_order
+        id_question:
+            columns:
+                - id_question
     id:
         idFeedbackAnswer:
             type: integer

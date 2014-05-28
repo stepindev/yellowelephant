@@ -14,12 +14,12 @@
             {% endstylesheets %}
         {% endblock %}    
       {% for aQuestionList in aQuestions %}          
-        {% if aQuestionList.questionType == 'slider' %}
+        {% if aQuestionList['question_type'] == 'slider' %}
             {% block genemu_jqueryslider_javascript %}
                 {% spaceless %}
                     <script type="text/javascript">
                         jQuery(document).ready(function($) {
-                            var $field = $('#{{sFormName}}_{{ aQuestionList.displayText }}');
+                            var $field = $('#{{sFormName}}_{{ aQuestionList['display_text'] }}');
                             var $configs = $.extend({{ configs|json_encode|raw }}, {
                                 value: {{ value ? value : 0 }},
                                 slide: function(event, ui) {
@@ -27,7 +27,7 @@
                                 }
                             });
 
-                            $('#{{sFormName}}_{{ aQuestionList.displayText }}_slider').slider($configs);
+                            $('#{{sFormName}}_{{ aQuestionList['display_text'] }}_slider').slider($configs);
                         });
                     </script>
                 {% endspaceless %}
@@ -36,7 +36,6 @@
       {% endfor %}
     </head>
     <body>
-
         {{ form_start(form) }}
         
         {% for key, value in form %}

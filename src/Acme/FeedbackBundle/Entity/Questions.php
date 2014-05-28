@@ -248,4 +248,32 @@ class Questions
     {
         return $this->displayText;
     }
+    /**
+     * @var string
+     */
+    private $validations;
+
+
+    /**
+     * Set validations
+     *
+     * @param string $validations
+     * @return Questions
+     */
+    public function setValidations($validations)
+    {
+        $this->validations = $validations;
+
+        return $this;
+    }
+
+    /**
+     * Get validations
+     *
+     * @return string 
+     */
+    public function getValidations()
+    {
+        return $this->validations;
+    }
 }

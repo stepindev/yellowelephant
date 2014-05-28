@@ -40,11 +40,12 @@ Acme\FeedbackBundle\Entity\Questions:
             fixed: false
             comment: ''
             column: question_type
-        isRequired:
-            type: boolean
+        validations:
+            type: text
             nullable: false
-            comment: ''
-            column: is_required
+            length: null
+            fixed: false
+            comment: 'Json value added'
         page:
             type: string
             nullable: false
